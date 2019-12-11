@@ -27,9 +27,42 @@ app.post("/", (req, res) => {
       " " +
       fiat +
       "</h1>";
-    res.write("<p>The current date is " + currentDate + "</p>");
+    res.write("<p>The current date and time is " + currentDate + "</p>");
     res.write(displayText);
     res.send();
+  });
+});
+
+app.post("/conversion", (req, res) => {
+  var baseURLConv = "https://apiv2.bitcoinaverage.com/convert/global";
+  var cryptoConv = req.body.crypto;
+  var fiatConv = req.body.fiat;
+  var amount = req.body.amount;
+  var options = {
+    url: baseURLConv,
+    method: "GET",
+    qs: {
+      from: cryptoConv,
+      to: fiatConv,
+      amount: amount
+    }
+  };
+  request(options, function(error, response, body) {
+    var dataConvert = JSON.parse(body);
+    var priceConvert = dataConvert.price;
+    var currentDateConvert = dataConvert.time;
+    var displayConvert =
+      "<h1>The price of " +
+      amount +
+      " " +
+      cryptoConv +
+      " in " +
+      fiatConv +
+      " is " +
+      priceConvert +
+      "</h1>";
+    res.write("<p>The current date and time is " + currentDateConvert + "</p>");
+    res.write(displayConvert);
   });
 });
 

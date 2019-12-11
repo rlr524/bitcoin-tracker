@@ -23,5 +23,31 @@
 
       <button type="submit" name="check">Check</button>
     </form>
+
+    <h1>Bitcoin Conversion</h1>
+    <form action="/conversion" method="POST">
+      <span class="conversion-field">
+        <label for="amount">Enter quantity: </label>
+        <input
+          type="text"
+          name="amount"
+          id="amount"
+          placeholder="e.g. 10"
+          required
+        />
+      </span>
+      <select name="crypto">
+        <option value="BTC">Bitcoin</option>
+        <option value="ETH">Ethereum</option>
+        <option value="LTC">Litecoin</option>
+      </select>
+
+      <select name="fiat">
+        <option value="USD">US Dollars</option>
+        <option value="GBP">GB Pounds</option>
+        <option value="EUR">EU Euros</option>
+      </select>
+      <button type="submit" name="calculate">Calculate</button>
+    </form>
   </body>
 </html>
